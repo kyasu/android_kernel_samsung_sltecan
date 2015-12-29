@@ -7,6 +7,7 @@
 **     TouchSense Kernel Module main entry-point.
 **
 ** Portions Copyright (c) 2008-2010 Immersion Corporation. All Rights Reserved.
+** Portions Copyright (c) 2013 The CyanogenMod Project
 **
 ** This file contains Original Code and/or Modifications of Original Code
 ** as defined in and that are subject to the GNU Public License v2 -
@@ -222,6 +223,27 @@ static void vibetonz_start(void)
 	if (ret)
 		DbgOut((KERN_ERR
 		"tspdrv: timed_output_dev_register is fail\n"));
+
+	ret = device_create_file(timed_output_vt.dev, &dev_attr_pwm_value);
+	if (ret < 0)
+		DbgOut((KERN_ERR
+		"tspdrv: device_create_file fail: pwm_value\n"));
+	ret = device_create_file(timed_output_vt.dev, &dev_attr_pwm_max);
+	if (ret < 0)
+		DbgOut((KERN_ERR
+		"tspdrv: device_create_file fail: pwm_max\n"));
+	ret = device_create_file(timed_output_vt.dev, &dev_attr_pwm_min);
+	if (ret < 0)
+		DbgOut((KERN_ERR
+		"tspdrv: device_create_file fail: pwm_min\n"));
+	ret = device_create_file(timed_output_vt.dev, &dev_attr_pwm_default);
+	if (ret < 0)
+		DbgOut((KERN_ERR
+		"tspdrv: device_create_file fail: pwm_default\n"));
+	ret = device_create_file(timed_output_vt.dev, &dev_attr_pwm_threshold);
+	if (ret < 0)
+		DbgOut((KERN_ERR
+		"tspdrv: device_create_file fail: pwm_threshold\n"));
 }
 
 /* File IO */
